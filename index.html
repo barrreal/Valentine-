@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentine</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #ffdde1, #ee9ca7);
+      overflow: hidden;
+      text-align: center;
+      color: #fff;
+    }
+
+    .page {
+      display: none;
+      padding: 20px;
+    }
+
+    .active {
+      display: block;
+    }
+
+    h1 {
+      font-size: 8vw;
+      margin: 20PX;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    p {
+  font-size: 4vw;
+  margin: 15px auto;
+  max-width: 90%;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  animation: fadeUp 1.5s ease;
+    }
+  
+  @keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+    button {
+      background: #ff4d6d;
+      border: none;
+      padding: 15px 25px;
+      font-size: 1.1em;
+      border-radius: 30px;
+      cursor: pointer;
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #e63950;
+      transform: scale(1.05);
+    }
+
+    footer {
+      position: fixed;
+      bottom: 10px;
+      width: 100%;
+      font-size: 0.9em;
+      color: #fff;
+    }
+
+    /* Animasi teks */
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    @keyframes typing {
+      from {width: 0;}
+      to {width: 100%;}
+    }
+
+    /* Animasi hati melayang */
+    .heart {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: float 6s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { left: -10px; top: 0; }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+      100% { transform: translateY(-600px) rotate(45deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Halaman Pembuka -->
+  <div id="page1" class="page active">
+    <h2>Hai ❤️ Aku punya sesuatu buat kamu…</h2>
+    <button onclick="nextPage()">Klik di sini</button>
+  </div>
+
+  <!-- Halaman Utama -->
+  <div id="page2" class="page">
+    <h1>Happy Valentine’s Day 💕</h1>
+    <p>Terima kasih sudah menjadi bagian indah dalam hidupku. Kamu sangat berarti dan selalu membuatku tersenyum. Semoga hari ini penuh cinta dan kebahagiaan untukmu 💖</p>
+    <button onclick="showLove()">Aku suka kamu ❤️</button>
+    <br><br>
+    <button onclick="toggleMusic()">🎵 Play/Pause Musik</button>
+  </div>
+
+  <!-- Musik Latar -->
+  <audio id="bgMusic" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <footer>Dibuat khusus untukmu 💖</footer>
+
+  <script>
+    function nextPage() {
+      document.getElementById('page1').classList.remove('active');
+      document.getElementById('page2').classList.add('active');
+    }
+
+    function showLove() {
+      alert("💖 Kamu selalu ada di hatiku 💖");
+      createHeart();
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.top = window.innerHeight + 'px';
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 6000);
+    }
+
+    function toggleMusic() {
+      const music = document.getElementById('bgMusic');
+      if (music.paused) {
+        music.play();
+      } else {
+        music.pause();
+      }
+    }
+
+    // Animasi hati melayang otomatis
+    setInterval(createHeart, 1000);
+  </script>
+</body>
+</html>
